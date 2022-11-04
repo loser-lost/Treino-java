@@ -1,0 +1,39 @@
+create database sistemaos
+CREATE TABLE IF NOT EXISTS `sistemaos`.`tbclientes` (
+  `idcli` INT NOT NULL AUTO_INCREMENT,
+  `nomecli` VARCHAR(50) NULL,
+  `endcli` VARCHAR(100) NULL,
+  `fonecli` VARCHAR(15) NULL,
+  `emailcli` VARCHAR(50) NULL,
+  PRIMARY KEY (`idcli`))
+ENGINE = InnoDB
+
+
+CREATE TABLE IF NOT EXISTS `sistemaos`.`tbos` (
+  `os` INT NOT NULL AUTO_INCREMENT,
+  `data_os` TIMESTAMP NULL,
+  `equipamento` VARCHAR(100) NULL,
+  `defeito` VARCHAR(100) NULL,
+  `servico` VARCHAR(100) NULL,
+  `tecnico` VARCHAR(50) NULL,
+  `valor` DECIMAL(10,2) NULL,
+  `tbclientes_idcli` INT NOT NULL,
+  PRIMARY KEY (`os`),
+  INDEX `fk_tbos_tbclientes_idx` (`tbclientes_idcli` ASC),
+  CONSTRAINT `fk_tbos_tbclientes`
+    FOREIGN KEY (`tbclientes_idcli`)
+    REFERENCES `sistemaos`.`tbclientes` (`idcli`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
+CREATE TABLE IF NOT EXISTS `sistemaos`.`tbusuario` (
+  `iduser` INT NOT NULL AUTO_INCREMENT,
+  `usuario` VARCHAR(45) NULL,
+  `fone` VARCHAR(15) NULL,
+  `login` VARCHAR(45) NULL,
+  `senha` VARCHAR(45) NULL,
+  `perfil` VARCHAR(20) NULL,
+  PRIMARY KEY (`iduser`))
+ENGINE = InnoDB
